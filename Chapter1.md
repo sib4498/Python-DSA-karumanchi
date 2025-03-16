@@ -167,3 +167,101 @@ For a given algorithm, we can represent the best, worst, and average cases in th
 
 Similarly, for the average case, the expression defines the inputs with which the algorithm takes the average running time (or memory).
 
+### 13. Asymptotic Notation
+ Having the expressions for the best, average and worst cases, for all three cases we need to identify the upper and lower bounds. To represent these upper and lower bounds, we need some kind of syntax, and that is the subject of the following discussion. Let us assume that the given
+ algorithm is represented in the form of function $f(n)$.
+
+### 14. Big-O Notation 
+**Big O Notation (O-notation): Asymptotic Upper Bound**
+
+This notation provides the asymptotic upper bound of a given function. It's generally represented as f(n) = O(g(n)). This means that for larger values of 'n', the upper bound of f(n) is g(n).
+
+* **Example:**
+    * If f(n) = n² + 100n + 10 + 50, then f(n) is O(n²).
+    * This indicates that n² represents the maximum rate of growth for f(n) at large values of 'n'.
+
+* **Formal Definition:**
+    * O(g(n)) = {f(n): there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀}.
+    * g(n) is an asymptotic tight upper bound for f(n).
+
+* **Objective:**
+    * To find the smallest rate of growth g(n) that is greater than or equal to the given algorithm's rate of growth f(n).
+* **Ignoring Lower Values:**
+    * Lower values of 'n' are typically discarded.
+    * The rate of growth at lower 'n' values is considered insignificant.
+
+* **Threshold (n₀):**
+    * n₀ is the point from which the rate of growth is considered.
+    * Below n₀, the rate of growth might be different.
+** No Uniqueness? **
+  There is no unique set of values for and in proving the asymptotic bounds. Let us consider, 100 + 5 = O( ). For this function there are multiple and values possible.
+
+### 15. Omega-Ω Notation
+**Omega Notation (Ω-notation): Asymptotic Lower Bound**
+
+This notation provides the tighter lower bound of a given algorithm. It's represented as f(n) = Ω(g(n)). This means that for larger values of 'n', the lower bound of f(n) is g(n).
+
+* **Formal Definition:**
+    * Ω(g(n)) = {f(n): there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀}.
+    * g(n) is an asymptotic tight lower bound for f(n).
+
+* **Objective:**
+    * To find the largest rate of growth g(n) that is less than or equal to the given algorithm's rate of growth f(n).
+
+* **Example:**
+    * If $f(n) = 100n^{1.15} + 10n + 50$, then $f(n)$ is $Ω(n^{1.15})$.
+
+    * n₀ is called the threshold for the given function.
+### 16. Theta- $\Theta$ Notation
+**Theta Notation (Θ-notation): Asymptotic Tight Bound**
+
+This notation determines if the upper and lower bounds of a given function (algorithm) are the same. It indicates that the algorithm's growth rate is tightly bound by a specific function.
+
+* **Definition:**
+    * Theta notation decides whether the upper and lower bounds of a given function (algorithm) are the same.
+    * If the upper bound (O) and lower bound (Ω) give the same result, then the Θ notation will also have the same rate of growth.
+* **Relationship to Bounds:**
+    * The average running time of an algorithm is always between the lower bound and the upper bound.
+    * If the upper and lower bounds are the same, the average case (Θ) will also have the same growth rate.
+* **Example:**
+    * If f(n) = 10n + n², then O(f(n)) = n² and Ω(f(n)) = n².
+    * Therefore, Θ(f(n)) = n².
+* **Varying Bounds:**
+    * If O and Ω are different, then Θ might also be different.
+    * In such cases, all possible time complexities need to be considered, and their average is calculated.
+* **Formal Definition:**
+    * Θ(g(n)) = {f(n): there exist positive constants c₁, c₂, and n₀ such that 0 ≤ c₁ * g(n) ≤ f(n) ≤ c₂ * g(n) for all n ≥ n₀}.
+    * g(n) is an asymptotic tight bound for f(n).
+    * Θ(g(n)) is the set of functions with the same order of growth as g(n).
+
+### 17. Why is it called Asymptotic Analysis?
+**Asymptotic Analysis: Approximating Algorithm Performance**
+
+The core concept behind Big O, Omega, and Theta notations is to approximate the performance of an algorithm for large input sizes.
+
+* **Approximation at Higher Values:**
+    * For a given function f(n) representing an algorithm's performance, we aim to find another function g(n) that approximates f(n) as 'n' becomes large.
+    * This means g(n) represents the algorithm's behavior for large input sizes.
+* **Asymptotic Curve:**
+    * g(n) acts as an asymptotic curve for f(n).
+    * In mathematics, such a curve that approaches another curve as a limit is called an asymptote.
+* **Asymptotic Analysis:**
+    * Therefore, the process of analyzing algorithms using these notations is called asymptotic analysis.
+
+ ### 18. Guidelines for Asymptotic Analysis
+   1. **Loop Time:** Loop time is the time for inner statements multiplied by loop iterations.
+
+           #executes n times
+           for i in range(0,n):
+           print ('Current Number :', i, sep=" ") #constant time 
+   > **Example:** A `for` loop running `n` times with constant-time operations inside has O(n) time complexity.
+  
+   2.  * **Nested Loops:** Analyze inside-out.
+       * **Time:** Product of loop iterations.
+       * **Example:** Two 'n' iteration loops result in O(n²).
+         # outer loop executed times
+
+    for i in range(0,n):
+    # inner loop executes n times
+    for j in range(0,n):
+    print ('i value %d and j value %d' % (i,j)) #constant time
