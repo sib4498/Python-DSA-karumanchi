@@ -253,7 +253,7 @@ The core concept behind Big O, Omega, and Theta notations is to approximate the 
 
            #executes n times
            for i in range(0,n):
-           print ('Current Number :', i, sep=" ") #constant time 
+               print ('Current Number :', i, sep=" ") #constant time 
    > **Example:** A `for` loop running `n` times with constant-time operations inside has O(n) time complexity.
   
    2.  * **Nested Loops:** Analyze inside-out.
@@ -262,6 +262,37 @@ The core concept behind Big O, Omega, and Theta notations is to approximate the 
          # outer loop executed times
 
     for i in range(0,n):
-    # inner loop executes n times
-    for j in range(0,n):
-    print ('i value %d and j value %d' % (i,j)) #constant time
+       # inner loop executes n times
+       for j in range(0,n):
+           print ('i value {i} and j value {j}') #constant time
+
+### 26. Amortized analysis
+Absolutely! You've provided a good overview of amortized analysis. Let's summarize and clarify some key points:
+
+**Amortized Analysis: Key Concepts**
+
+* **Focus on Sequences:** Amortized analysis examines the average cost of operations within a sequence, not the cost of individual operations.
+* **Worst-Case, Sequence-Based:** It provides a worst-case guarantee for the *entire sequence* of operations, even if some individual operations are expensive.
+* **No Distribution Assumptions:** Unlike average-case analysis, it doesn't assume any specific probability distribution of inputs.
+* **Motivation:** To obtain a tighter, more realistic bound on the performance of algorithms where some operations are costly but infrequent.
+* **Amortized Cost:** An artificial cost assigned to each operation. The total amortized cost of a sequence bounds the total actual cost.
+* **Accounting for State Changes:** Amortized analysis accounts for how expensive operations can alter the data structure, making subsequent operations cheaper.
+
+**Why Amortized Analysis is Useful**
+
+* It provides a more accurate picture of performance when expensive operations are rare but have a significant impact.
+* It helps in understanding the efficiency of data structures and algorithms that have varying operation costs.
+
+**Example Explanation (Finding the Smallest Element)**
+
+Your example of finding the smallest element in an array highlights the benefit of amortized analysis.
+
+* **Sorting:** Sorting the array once takes O(n log n) time.
+* **Subsequent Minimum Queries:** After sorting, finding the minimum element is O(1).
+* **Sequence of operations:** If we have m find minimum operations, then the first operation is O(n log n) and the next m-1 operations are O(1) each.
+* **Amortized cost:** If m is large, the total cost is O(n log n + m). The amortized cost per operation is approximately O((n log n + m) / m). If m is greater than n log n, then the amortized cost becomes O(1).
+* **Benefit:** By performing the initial expensive sort, we significantly reduce the cost of subsequent minimum queries. This is a classic example of how an expensive operation can "pay" for future cheap operations.
+
+**In essence:**
+
+Amortized analysis helps us understand that even if some operations are expensive, their impact is "averaged out" over the entire sequence, leading to a more accurate assessment of overall performance.
